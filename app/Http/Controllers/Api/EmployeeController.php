@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Employee; 
+use App\Employee;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 
@@ -63,7 +64,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Employee $employee)
-    {
+    { 
         $employee = $employee->update($request->input());
         return response()->json($employee, 200);
     }
@@ -74,10 +75,10 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {   
         try {
-            $employee->delete($employee);
+            Employee::find($id)->delete();
         } catch(\Exception $e) {
             return response()->json(['errors' => $e->getMessage()]);
         }

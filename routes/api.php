@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
 Route::group(['middleware' => ['api', 'jwt.verify']], function() {
    Route::post('me', 'Api\UserController@me'); 
    Route::put('update/{user}', 'Api\UserController@update');  
@@ -22,5 +21,5 @@ Route::group([
    Route::get('/', 'Api\EmployeeController@index');
    Route::post('/', 'Api\EmployeeController@store');
    Route::put('/{employee}', 'Api\EmployeeController@update');
-   Route::delete('/{id}', 'Api\EmployeeController@delete');
+   Route::delete('/{id}', 'Api\EmployeeController@destroy');
 });
