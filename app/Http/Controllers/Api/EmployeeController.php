@@ -8,6 +8,7 @@ use App\Employee;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
+use App\Http\Requests\EmployeeStoreRequest;
 
 class EmployeeController extends Controller
 {
@@ -28,19 +29,13 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeStoreRequest $request)
     {
-        $validate = Validator::make($request->all(), Employee::VALIDATE_RULES);
-        if($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()]);
-        }
-           
-        $employee = Employee::create([
-            'firstname' => $request['firstname'],
-            'lastname' => $request['lastname'],
-            'dob' => $request['dob'],
-            'user_id' => JWTAuth::toUser()->id,
-        ]);
+        // $validate = Validator::make($request->all(), Employee::VALIDATE_RULES);
+        // if($validate->fails()) {
+        //     return response()->json(['errors' => $validate->errors()]);
+        // } 
+        $employee = Employee::create($request->input());
         return response()->json(['message' => 'Create Successfully', 'result' => $employee]);
     }
 
