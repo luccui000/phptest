@@ -33,14 +33,14 @@ class EmployeeController extends Controller
         if($validate->fails()) {
             return response()->json(['errors' => $validate->errors()]);
         }
-        $user = JWTAuth::toUser();
-        dd($user);
+           
         $employee = Employee::create([
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
-            'dob' => $request['dob']
+            'dob' => $request['dob'],
+            'user_id' => JWTAuth::toUser()->id,
         ]);
-        return response()->json(['message' => 'Create Successfully', 'result' => employee]);
+        return response()->json(['message' => 'Create Successfully', 'result' => $employee]);
     }
 
     /**

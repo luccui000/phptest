@@ -12,7 +12,8 @@ class Employee extends Model
         'id',
         'firstname',
         'lastname',
-        'dob'
+        'dob',
+        'user_id'
     ];
     public const VALIDATE_RULES = [
         'firstname' => 'required|string|max:255',

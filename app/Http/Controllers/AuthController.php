@@ -19,6 +19,9 @@ class AuthController extends Controller
     {  
         $rules = array_merge(User::VALIDATION_RULES, ['name' => 'required|string|max:255']);
         $validator = Validator::make($request->input(),  $rules);  
+        if($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -34,8 +37,7 @@ class AuthController extends Controller
     // [POST] /api/login 
     public function login(Request $request)
     {  
-        $user = $request->only('email', 'password');
-        $validator = Validator::make($request->input(), User::VALIDATION_RULES);
+        $user = $request->only('email', 'password'); 
         $token = null;  
         if (!$token = JWTAuth::attempt($user)) {
             return response()->json([
@@ -49,13 +51,7 @@ class AuthController extends Controller
             'expires_in' => JWTAuth::factory()->getTTL() * 60
         ]);
     }
- 
-    
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+  
     // [POST] /api/logout
     public function logout(Request $request)
     {

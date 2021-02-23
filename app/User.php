@@ -33,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
     ];
     public function employees()
     {
-        return $this->hasOne('App\Employee');
+        return $this->hasOne('App\Employee', 'user_id', 'id');
     }
     public function getJWTIdentifier()
     {
