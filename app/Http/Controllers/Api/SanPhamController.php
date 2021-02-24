@@ -15,8 +15,16 @@ class SanPhamController extends Controller
      */
     public function index()
     {
+        $thongso = null;
         $sanpham = SanPham::all();
-        return response()->json(['result' => $sanpham]);
+        foreach($sanpham as $item) {
+            foreach($item->thong_so as $ts) {
+                foreach($ts->chi_tiet as $ct) {
+                    $thongso = $ct->tenthongso;
+                }
+            }
+        }
+        return response()->json(['result' => $thongso]);
     }
 
     /**

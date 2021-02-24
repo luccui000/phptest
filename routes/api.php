@@ -23,3 +23,13 @@ Route::group([
    Route::put('/{employee}', 'Api\EmployeeController@update');
    Route::delete('/{id}', 'Api\EmployeeController@destroy');
 });
+
+Route::group([ 
+   'middleware' => ['api', 'jwt.verify'],
+   'prefix' => 'sanpham'
+], function() {
+   Route::get('/', 'Api\SanPhamController@index');
+   Route::post('/', 'Api\SanPhamController@store');
+   Route::put('/', 'Api\SanPhamController@update');
+   Route::delete('/', 'Api\SanPhamController@destroy');
+});

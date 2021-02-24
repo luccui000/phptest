@@ -13,9 +13,9 @@ class SanPham extends Model
         'id',
         'tensanpham'
     ]; 
-    public function san_pham() 
+    public function thong_so() 
     {
         $this->belongsToMany('App\ThongSo', 'san_pham_thong_so', 'sanpham_id', 'thongso_id');
     }
-    protected $timestamps = true;
+    public $timestamps = false;
 }
