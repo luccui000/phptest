@@ -8,13 +8,10 @@ use Illuminate\Notifications\Notifiable;
 class ChiTiet extends Model
 {
     use Notifiable;
-    protected $table = 'san_pham';
+    protected $table = 'chi_tiet';
     protected $fillable = [
         'id',
-        'tensanpham'
+        'ten',
+        'giatri'
     ]; 
-    public function san_pham() 
-    {
-        $this->belongsToMany('App\ThongSo', 'san_pham_thong_so', 'id', 'id');
-    }
 }

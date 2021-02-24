@@ -13,12 +13,12 @@ class CreateThongSoChiTietTable extends Migration
      */
     public function up()
     {
-        Schema::create('thong_so_chi_tiet', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->unsignedBigInteger('thonso_id')->index();
-            $table->foreign('thonso_id')->references('id')->on('thong_so')->onDelete('cascade');
-            $table->unsignedBigInteger('chitiet_id');
-            $table->foreign('chitiet_id')->references('id')->on('chi_tiet')->onDelete('cascade'); 
+        Schema::create('thong_so_chi_tiet', function (Blueprint $table) { 
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('chitiet_id')->index();
+            $table->foreign('chitiet_id')->references('id')->on('chi_tiet')->onDelete('cascade');
+            $table->unsignedBigInteger('thongso_id');
+            $table->foreign('thongso_id')->references('id')->on('thong_so')->onDelete('cascade');
             $table->timestamps();
         });
     }

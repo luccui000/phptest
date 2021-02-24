@@ -2,8 +2,7 @@
  
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use DateTime;
+use Illuminate\Support\Facades\DB; 
 
 class SanPhamSeeder extends Seeder
 {
@@ -13,11 +12,9 @@ class SanPhamSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $date = new DateTime();
-        $unixTimestamps = $date->getTimestamp();
+    { 
         DB::connection('mysql')->table('san_pham')->insert([
-            ['id' => 1, 'tensanpham' => 'Điện Thoại'],
+            ['id' => 1, 'tensanpham' => 'Điện Thoại', ],
             ['id' => 2, 'tensanpham' => 'Máy Tính'],
             ['id' => 3, 'tensanpham' => 'Smart Watch'],
             ['id' => 4, 'tensanpham' => 'Phụ Kiện'],

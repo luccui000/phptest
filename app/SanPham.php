@@ -17,4 +17,5 @@ class SanPham extends Model
     {
         $this->belongsToMany('App\ThongSo', 'san_pham_thong_so', 'sanpham_id', 'thongso_id');
     }
+    protected $timestamps = true;
 }
