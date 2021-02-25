@@ -34,8 +34,16 @@ class EmployeeController extends Controller
         // $validate = Validator::make($request->all(), Employee::VALIDATE_RULES);
         // if($validate->fails()) {
         //     return response()->json(['errors' => $validate->errors()]);
-        // } 
-        $employee = Employee::create($request->input());
+        // }  
+        $employee = Employee::firstOrCreate(
+            ['user_id' => $request->input('user_id')],
+            [     
+                'firstname' => $request->input('firstname'), 
+                'lastname' => $request->input('lastname'), 
+                'dob' => $request->input('dob'),
+                'user_id' => $request->input('user_id')
+            ]
+        );
         return response()->json(['message' => 'Create Successfully', 'result' => $employee]);
     }
 
