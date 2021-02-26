@@ -13,13 +13,11 @@ class CreateSanPhamThongSoTable extends Migration
      */
     public function up()
     {
-        Schema::create('san_pham_thong_so', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('sanpham_id')->unsigned()->index();
-            $table->foreign('sanpham_id')->references('id')->on('san_pham')->onDelete('cascade');
-            $table->unsignedBigInteger('thongso_id')->unsigned();
-            $table->foreign('thongso_id')->references('id')->on('thong_so')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('san_pham_thong_so', function (Blueprint $table) { 
+            $table->integer('san_pham_id')->unsigned();
+            $table->foreign('san_pham_id')->references('id')->on('san_pham');
+            $table->integer('thong_so_id')->unsigned();
+            $table->foreign('thong_so_id')->references('id')->on('thong_so'); 
         });
     }
 

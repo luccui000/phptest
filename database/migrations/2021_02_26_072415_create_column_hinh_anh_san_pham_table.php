@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThongSoTable extends Migration
+class CreateColumnHinhAnhSanPhamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateThongSoTable extends Migration
      */
     public function up()
     {
-        Schema::create('thong_so', function (Blueprint $table) {
-            $table->increments('id'); 
-            $table->string('tenthongso');
-            $table->timestamps();
+        Schema::table('san_pham', function (Blueprint $table) {
+            $table->string('hinhanh')
+                ->after('tensanpham')
+                ->nullable();
         });
     }
 
@@ -27,7 +27,6 @@ class CreateThongSoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thong_so');
+        Schema::dropColumn('hinhanh');
     }
 }
-

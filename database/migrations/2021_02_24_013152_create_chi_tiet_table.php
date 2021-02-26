@@ -14,7 +14,7 @@ class CreateChiTietTable extends Migration
     public function up()
     {
         Schema::create('chi_tiet', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('ten');
             $table->string('giatri');
             $table->timestamps();

@@ -11,11 +11,15 @@ class SanPham extends Model
     protected $table = 'san_pham';
     protected $fillable = [
         'id',
-        'tensanpham'
+        'masanpham',
+        'tensanpham',
+        'slug',
+        'hinhanh',
+        'mota'
     ]; 
     public function thong_so() 
     {
-        $this->belongsToMany('App\ThongSo', 'san_pham_thong_so', 'sanpham_id', 'thongso_id');
+        return $this->belongsToMany(ThongSo::class);
     }
     public $timestamps = false;
 }

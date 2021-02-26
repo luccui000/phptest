@@ -14,9 +14,8 @@ class ThongSo extends Model
         'id',
         'tenthongso'
     ]; 
-    
     public function chi_tiet() 
     {
-        $this->belongsToMany('App\ChiTiet', 'thong_so_chi_tiet', 'thongso_id', 'chitiet_id');
+        return $this->belongsToMany(ChiTiet::class);
     }
 }

@@ -81,7 +81,7 @@ class EmployeeController extends Controller
     public function destroy($id)
     {   
         try {
-            Employee::find($id)->delete();
+            Employee::find($id)->trashed();
         } catch(\Exception $e) {
             return response()->json(['errors' => $e->getMessage()]);
         }

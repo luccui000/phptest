@@ -14,8 +14,10 @@ class CreateSanPhamTable extends Migration
     public function up()
     {
         Schema::create('san_pham', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('masanpham');
             $table->string('tensanpham');
+            $table->text('mota');
             $table->timestamps();
         });
     }

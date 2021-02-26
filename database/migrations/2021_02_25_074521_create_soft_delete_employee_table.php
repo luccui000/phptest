@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThongSoTable extends Migration
+class CreateSoftDeleteEmployeeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateThongSoTable extends Migration
      */
     public function up()
     {
-        Schema::create('thong_so', function (Blueprint $table) {
-            $table->increments('id'); 
-            $table->string('tenthongso');
-            $table->timestamps();
+        Schema::table('employees', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -27,7 +25,6 @@ class CreateThongSoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thong_so');
+        Schema::dropIfExists('employees');
     }
 }
-

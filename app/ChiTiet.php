@@ -14,4 +14,8 @@ class ChiTiet extends Model
         'ten',
         'giatri'
     ]; 
+    public function thong_so() 
+    {
+        return $this->belongsToMany(ThongSo::class);
+    }
 }
