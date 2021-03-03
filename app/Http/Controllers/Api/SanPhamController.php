@@ -16,21 +16,8 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        $sanpham = SanPham::all(); 
-        // $sanpham->thong_so()->sync([1, 2, 3, 4, 5, 6]);
-        // $sanpham->thong_so()->detach(2);
-        // foreach($sanpham as $item) {
-        //     foreach($item->thong_so as $ts) {
-        //         foreach($ts->chi_tiet as $ct) {
-        //             $thongso = $ct->tenthongso;
-        //         }
-        //     }
-        // }
-        // $result = ThongSo::find(1)->chi_tiet();
-        // $thongso = null;
-        // foreach($sanpham->thong_so as $ts) {
-        //     $thongso =  $ts->tenthongso;
-        // }
+        $sanpham = SanPham::all();  
+        dd($sanpham);
         return response()->json(['result' => $sanpham]);
     }
 
