@@ -21,3 +21,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');  
 
 Route::get('pay', 'Api\PayOrderController@index');
+Route::get('channels', 'ChannelsController@index');
+Route::get('channels/post', 'PostController@create');

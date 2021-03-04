@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use App\Billings\CreditPaymentGateway;
 use App\Billings\PaymentGateway;
+use App\Channels;
 use App\Contracts\Repositories\PaymentGatewayContrast;
+use App\View\Channels\ChannelsComposer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -24,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
             }
             return new PaymentGateway('vnd');
         });
+        $this->app->singleton(
+            \App\Contracts\Repositories\CategoryRepository::class,
+            \App\Repositories\CategoryRepositoryEloquent::class
+        );
     }
 
     /**
@@ -33,11 +40,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
         
-        $this->app->singleton(
-            \App\Contracts\Repositories\CategoryRepository::class,
-            \App\Repositories\CategoryRepositoryEloquent::class
-        );
+        // view()->share('channels', Channels::where('id', '=', '10')->get());
+        // view()->composer(['post.*', 'channel.*'], function($view) {
+        //     $view->with('channels', Channels::orderBy('name', 'asc')->get());
+        // }); 
+        view()->composer('partials.*', ChannelsComposer::class);
     }
 }
