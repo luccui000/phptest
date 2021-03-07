@@ -18,6 +18,9 @@ class PostController extends Controller
     { 
         $posts = $this->post->all();
         // return response()->json(['posts' => $posts ]);
+        // $posts = Post::whereDate('updated_at', '2021-03-05')->get()->count;
+
+        // dd();
         return view('post.index', compact('posts'));
     }
     public  function show($id)
