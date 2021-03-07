@@ -12,8 +12,11 @@ use JWTAuth;
 class UserController extends Controller
 { 
     public function me(Request $request) 
-    { 
-        return response()->json(['result' => JWTAuth::toUser()]);   
+    {  
+        $user = JWTAuth::toUser();
+        $userId = $user->id;
+        $userImage = User::find($userId)->images()->first();
+        return response()->json(['user' => $user, 'image' => $userImage->url ]);   
     }
     public function update(Request $request, User $user)
     { 

@@ -6,6 +6,8 @@ use App\Billings\CreditPaymentGateway;
 use App\Billings\PaymentGateway;
 use App\Channels;
 use App\Contracts\Repositories\PaymentGatewayContrast;
+use App\Repositories\PostRepository;
+use App\Repositories\PostRepositoryConstract;
 use App\View\Channels\ChannelsComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -19,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
+    { 
         //
         $this->app->singleton(PaymentGatewayContrast::class, function($app) {
             if(request()->has('credit')) {
