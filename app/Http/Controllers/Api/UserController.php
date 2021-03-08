@@ -11,6 +11,10 @@ use JWTAuth;
 
 class UserController extends Controller
 { 
+    public function register()
+    {
+        return view('user.register');
+    }
     public function me(Request $request) 
     {  
         $user = JWTAuth::toUser();
