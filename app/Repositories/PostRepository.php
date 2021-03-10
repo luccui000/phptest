@@ -4,11 +4,20 @@ namespace App\Repositories;
 
 use App\Post;
 use App\Repositories\PostRepositoryConstract;
+use Illuminate\Pipeline\Pipeline;
 
 class PostRepository implements PostRepositoryConstract {
     public function all()
     {
-        return Post::all();
+        return app(Pipeline::class)
+                ->send(Post::query())
+                ->through([
+                    \App\QueryFilters\Active::class,
+                    \App\QueryFilters\Limit::class,
+                    \App\QueryFilters\Sort::class,
+                ])
+                ->thenReturn()
+                ->paginate(Post::PAGINATE);
     }
     public function find($id)
     {

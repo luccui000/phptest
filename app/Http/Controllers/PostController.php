@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostStoreRequest;
 use App\Post;
 use App\Repositories\PostRepositoryConstract;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
+use Datatables;
 
 class PostController extends Controller
 {
@@ -16,12 +17,22 @@ class PostController extends Controller
     }
     public function index()
     { 
-        $posts = $this->post->all();
+        // $posts = $this->post->all();
         // return response()->json(['posts' => $posts ]);
         // $posts = Post::whereDate('updated_at', '2021-03-05')->get()->count;
-
+        $posts = $this->post->all()->toArray();
         // dd();
-        return view('post.index', compact('posts'));
+        $posts = array_chunk($posts, 1000);
+ 
+        // $p = Post::select(['id', 'title', 'created_at', 'updated_at', 'active']);
+        // $posts = Datatables::of($p)
+        //             ->addColumn('post_url', function($p) {
+        //                 return url('post/'. $p->id);
+        //             })
+        //             ->make(true);
+        return response()->json($posts);
+        
+        // return view('post.index', compact('posts'));
     }
     public  function show($id)
     { 

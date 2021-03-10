@@ -19,6 +19,11 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');  
+Route::get('/customers', 'CustomerController@index')->name('customer.index');  
+Route::get('/customer/create', 'CustomerController@create')->name('customer.create');  
+Route::post('/customer/store', 'CustomerController@store')->name('customer.store');  
+Route::get('/customer/{id}/edit', 'CustomerController@edit')->name('customer.edit');  
+Route::put('/customer/{id}/update', 'CustomerController@update')->name('customer.update');  
 Route::get('/register', 'Api\UserController@register')->name('user.register');  
 
 Route::get('pay', 'Api\PayOrderController@index');

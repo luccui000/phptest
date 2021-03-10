@@ -8,19 +8,19 @@
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Content</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
-                <th scope="col">Action</th>
+                <th scope="col">title</th>
+                <th scope="col">active</th>
+                <th scope="col">created_at At</th>
+                <th scope="col">updated_at</th>
+                <th scope="col">action</th>
             </tr>
         </thead>
         <tr> 
             <tbody>
-                @forelse($posts->chunk(10)[5] as $item) 
+                @forelse($posts as $item) 
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->content }}</td>
+                    <td>{{ $item->title }}</td> 
+                    <td>{{ $item->active }}</td> 
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->updated_at }}</td>
                     <td><a href="{{ route('post.delete', ['id' => $item->id]) }}" 
@@ -33,5 +33,6 @@
                 @endforelse
             </tbody>  
         </table>
+        {{ $posts->appends(request()->input())->links() }}
     </div>
 @endsection

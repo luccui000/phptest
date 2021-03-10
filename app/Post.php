@@ -10,7 +10,8 @@ class Post extends Model
     public $fillable = [
         'id',
         'title',
-        'content'
+        'content',
+        'active'
     ];
     public function images()
     {
@@ -27,4 +28,5 @@ class Post extends Model
         'title.max' => 'Tiêu đề bài viết tối đa 255 kí tự',
         'content.required' => 'Vui lòng nhập nội dung bài viết',
     ];
+    public const PAGINATE = 10;
 }
