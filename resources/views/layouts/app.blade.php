@@ -16,8 +16,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
+    <!-- Styles --> 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">     
     @stack('styles')
 </head>
 <body>
@@ -78,7 +78,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>   
+    </div>     
     @stack('scripts')
 </body>
 </html>

@@ -17,28 +17,33 @@ class CustomerController extends Controller
     }
     public function index()
     {
+        $this->authorize('view-customer');
         $customers = $this->customer->anyData(); 
-        return view('customer.index', compact('customers'));
+        // return view('customer.index', compact('customers'));
+        return view('customer.index2');
     }
    public function create()
    {
+        $this->authorize('add-customer');
         return view('customer.create');
    }
    public function store(CustomerStoreRequest $request)
    { 
-        dd($request->input());
+        $this->authorize('add-customer'); 
         $this->customer->create($request->input()); 
         return redirect('customers');
     }
     public function update($id, CustomerStoreRequest $request)
     {
+        $this->authorize('edit-customer');
         $this->customer->update($id, $request->input());
         return redirect('customers');
    }
    public function edit($id)
    {
-       $customer = $this->customer->find($id);
-       return view('customer.edit', compact('customer'));
+        $this->authorize('edit-customer');
+        $customer = $this->customer->find($id);
+        return view('customer.edit', compact('customer'));
    } 
    public function destroy(Customer $customer) 
    {

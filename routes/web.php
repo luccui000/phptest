@@ -13,6 +13,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+ 
 
 Route::get('/', function () { 
     return view('welcome');
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/customer/{id}/update', 'CustomerController@update')->name('customer.update');  
     Route::delete('/customer/{customer}', 'CustomerController@destroy')->name('customer.destroy');  
 
+});
+Route::group(['prefix' => 'datatable'], function() {
+    Route::get('customers', 'DatatableController@customers')->name('datatable.customers');
 });
 Route::get('/home', 'HomeController@index')->name('home');  
 Route::get('/register', 'Api\UserController@register')->name('user.register');  

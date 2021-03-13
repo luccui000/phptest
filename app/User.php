@@ -47,4 +47,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function hasPermission(Permission $permission)
+    {
+        // toán tử  !! sẽ ép kiểu trả về true hoặc false
+        // optional nếu kết quả là null thì không báo lỗi
+        return !!optional(optional($this->role)->permissions)->contains($permission);
+    }
 }
