@@ -6,6 +6,7 @@ use App\Contracts\Repositories\CustomerRepositoryConstract;
 use App\Customer;
 use App\Http\Requests\CustomerStoreRequest; 
 use Datatables;
+use Tymon\JWTAuth\Claims\Custom;
 
 class CustomerController extends Controller
 {
@@ -16,7 +17,7 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        $customers = $this->customer->all();
+        $customers = $this->customer->anyData(); 
         return view('customer.index', compact('customers'));
     }
    public function create()
@@ -24,16 +25,44 @@ class CustomerController extends Controller
         return view('customer.create');
    }
    public function store(CustomerStoreRequest $request)
-   {
+   { 
+        dd($request->input());
         $this->customer->create($request->input()); 
         return redirect('customers');
+    }
+    public function update($id, CustomerStoreRequest $request)
+    {
+        $this->customer->update($id, $request->input());
+        return redirect('customers');
    }
-   public function update()
+   public function edit($id)
    {
-
-   }
-   public function edit()
-   {
-       
+       $customer = $this->customer->find($id);
+       return view('customer.edit', compact('customer'));
    } 
+   public function destroy(Customer $customer) 
+   {
+        dd($customer);
+   }
+   public function anyData()
+   {
+        $customer = $this->customer->anyData();
+        return Datatables::of($customer)
+            ->editColumn('image', function($customer) {
+                return url('storage/' . $customer->image);
+            })
+            ->editColumn('created_at', function ($customer) {
+                return $customer->updated_at->format('d/m/Y');
+            })
+            ->editColumn('updated_at', function ($customer) {
+                return $customer->updated_at->format('d/m/Y');
+            })
+            ->addColumn('action', function($customer) { 
+                $button = '<a  href="'. url('customer/') . '/' . $customer->id . '/edit" class="edit btn btn-primary btn-sm">edit</a>';
+                $button .= '<form action="' .  url('customer/') . '/' . $customer->id. '" method="POST">  
+                                <input type="submit" class="edit btn btn-danger btn-sm" value="delete" />
+                            </form>'; 
+                return $button;
+            })->rawColumns(['action'])->make(true);
+   }
 }

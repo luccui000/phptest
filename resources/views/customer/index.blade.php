@@ -16,7 +16,8 @@
                     <th scope="col">#</th>
                     <th scope="col">name</th>
                     <th scope="col">email</th> 
-                    <th scope="col">active</th> 
+                    <th scope="col">created at</th> 
+                    <th scope="col">updated at</th> 
                     <th scope="col">action</th>
                   </tr>
                 </thead>
@@ -26,7 +27,8 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $customer->name }}</td> 
                             <td>{{ $customer->email }}</td> 
-                            <td>{{ $customer->active }}</td> 
+                            <td>{{ $customer->created_at }}</td> 
+                            <td>{{ $customer->updated_at }}</td> 
                             <td><a href="{{ route('customer.edit', ['id' => $customer->id ])}}">edit</a></td> 
                         </tr> 
                     @empty

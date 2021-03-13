@@ -8,11 +8,13 @@ use Illuminate\Support\Str;
 abstract class StoreImage  { 
     public function create($input) 
     { 
-        return $this->action($input);
+        $this->store($input);
+        return $this->builderCreate($input);
     }
-    public function update($id, array $data)
+    public function update($input)
     {
-        return $this->builderUpdate($id, $data);
+        $this->store($input);
+        return $this->builderUpdate($input);
     }
     protected function store($input)
     {
@@ -20,8 +22,8 @@ abstract class StoreImage  {
             $input->update([
                 'image' => request()->image->store('uploads', 'public'),
             ]);
-       }
+        }
     } 
-    abstract protected function action($input);
-    abstract protected function builderUpdate($id, array $data);
+    abstract protected function builderCreate($input);
+    abstract protected function builderUpdate($input);
 }

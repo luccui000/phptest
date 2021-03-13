@@ -12,6 +12,7 @@ class Customer extends Model
         'name',
         'email',
         'company_id',
+        'active',
         'image'
     ];
     public $timestamps = true;

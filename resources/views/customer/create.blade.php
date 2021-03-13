@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-
+<style>
+    .avatar {
+        padding-bottom: 35px;
+    }
+</style>
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -22,12 +26,12 @@
                     <div class="form-group">
                         <select name="active" id="form-control">
                             <option value="0">0</option>
-                            <option value="0">1</option>
+                            <option value="1">1</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="">Company ID</label> 
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control avatar">
                     </div>
                     <input type="submit" value="Create">
                 </form>

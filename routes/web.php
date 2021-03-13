@@ -18,12 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/customers', 'CustomerController@index')->name('customer.index');  
+    Route::get('/customers/anyData', 'CustomerController@anyData')->name('customer.anyData');  
+    Route::get('/customer/create', 'CustomerController@create')->name('customer.create');  
+    Route::post('/customer/store', 'CustomerController@store')->name('customer.store');  
+    Route::get('/customer/{id}/edit', 'CustomerController@edit')->name('customer.edit');  
+    Route::put('/customer/{id}/update', 'CustomerController@update')->name('customer.update');  
+    Route::delete('/customer/{customer}', 'CustomerController@destroy')->name('customer.destroy');  
+
+});
 Route::get('/home', 'HomeController@index')->name('home');  
-Route::get('/customers', 'CustomerController@index')->name('customer.index');  
-Route::get('/customer/create', 'CustomerController@create')->name('customer.create');  
-Route::post('/customer/store', 'CustomerController@store')->name('customer.store');  
-Route::get('/customer/{id}/edit', 'CustomerController@edit')->name('customer.edit');  
-Route::put('/customer/{id}/update', 'CustomerController@update')->name('customer.update');  
 Route::get('/register', 'Api\UserController@register')->name('user.register');  
 
 Route::get('pay', 'Api\PayOrderController@index');
