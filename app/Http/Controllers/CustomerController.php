@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Contracts\Repositories\CustomerRepositoryConstract;
 use App\Customer;
 use App\Http\Requests\CustomerStoreRequest; 
-use Datatables;
-use Tymon\JWTAuth\Claims\Custom;
+use Datatables; 
+use Collective\Html\FormFacade as Form;
 
 class CustomerController extends Controller
 {
@@ -20,7 +20,7 @@ class CustomerController extends Controller
         $this->authorize('view-customer');
         $customers = $this->customer->anyData(); 
         // return view('customer.index', compact('customers'));
-        return view('customer.index2');
+        return view('customer.index');
     }
    public function create()
    {
@@ -51,7 +51,7 @@ class CustomerController extends Controller
    }
    public function anyData()
    {
-        $customer = $this->customer->anyData();
+        $customer = $this->customer->all();
         return Datatables::of($customer)
             ->editColumn('image', function($customer) {
                 return url('storage/' . $customer->image);
@@ -64,9 +64,9 @@ class CustomerController extends Controller
             })
             ->addColumn('action', function($customer) { 
                 $button = '<a  href="'. url('customer/') . '/' . $customer->id . '/edit" class="edit btn btn-primary btn-sm">edit</a>';
-                $button .= '<form action="' .  url('customer/') . '/' . $customer->id. '" method="POST">  
-                                <input type="submit" class="edit btn btn-danger btn-sm" value="delete" />
-                            </form>'; 
+                $button .= Form::open(['route' => ['customer.destroy',  $customer->id], 'method' => 'delete', 'style'=>'display:inline']);
+                $button .= ' <button class="btn btn-danger btn-sm" type="submit">delete</button>';
+                $button .= Form::close();
                 return $button;
             })->rawColumns(['action'])->make(true);
    }
